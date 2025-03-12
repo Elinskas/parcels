@@ -43,10 +43,10 @@ function deleteRowFromTable($row_id)
     global $link;
     openDB();
 
-    mysqli_query($link, "DELETE FROM parcels WHERE parcel_id = $row_id");
+    $result = mysqli_query($link, "DELETE FROM parcels WHERE parcel_id = $row_id");
 
     closeDB();
-
+    return $result;
 }
 
 function addRowToTable($parcel_type, $sender_id, $receiver_name, $receiver_address, )
@@ -54,7 +54,7 @@ function addRowToTable($parcel_type, $sender_id, $receiver_name, $receiver_addre
     global $link;
     openDB();
 
-    mysqli_query($link, "
+    $result = mysqli_query($link, "
     INSERT INTO parcels SET 
     parcel_type = '$parcel_type',
     sender_id = '$sender_id',
@@ -65,7 +65,7 @@ function addRowToTable($parcel_type, $sender_id, $receiver_name, $receiver_addre
     ");
 
     closeDB();
-
+    return $result;
 }
 
 ?>
