@@ -1,3 +1,7 @@
+<?php
+include 'db_functions.php';
+$offices = getOfficeAdresses();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,7 +16,17 @@
         <div><label for="parcel_type">Тип посылки: <input type="text" name="parcel_type"></label></div>
         <div><label for="sender_id">ID отправителя: <input type="text" name="sender_id"></label></div>
         <div><label for="receiver_name">Имя получателя: <input type="text" name="receiver_name"></label></div>
-        <div><label for="receiver_address">Адрес получателя: <input type="text" name="receiver_address"></label></div>
+        <div><label for="office_address">Адрес офиса:
+                <select name="office_id">
+                    <?php
+                    foreach ($offices as $office) {
+                        $id = $office['office_id'];
+                        $address = $office['address'];
+                        echo "<option value='$id'>$address</option>";
+                    }
+                    ?>
+                </select>
+            </label></div>
         <div><input type="submit" value="Добавить">
     </form>
 </body>
