@@ -43,29 +43,50 @@ function deleteRowFromTable($row_id)
     global $link;
     openDB();
 
-    $result = mysqli_query($link, "DELETE FROM parcels WHERE parcel_id = $row_id");
+    mysqli_query($link, "DELETE FROM parcels WHERE parcel_id = $row_id");
 
     closeDB();
-    return $result;
+
 }
 
-function addRowToTable($parcel_type, $sender_id, $receiver_name, $receiver_address, )
+function addRowToTable($parcel_type, $sender_id, $receiver_name, $office_id)
 {
     global $link;
     openDB();
 
-    $result = mysqli_query($link, "
+    mysqli_query($link, "
     INSERT INTO parcels SET 
     parcel_type = '$parcel_type',
     sender_id = '$sender_id',
     receiver_name = '$receiver_name',
-    receiver_address = '$receiver_address',
-    office_id = 1,
+    office_id = $office_id,
     sending_date = CURRENT_TIMESTAMP
     ");
 
     closeDB();
-    return $result;
+
+}
+
+function getOfficeAdresses()
+{
+    global $link;
+    openDB();
+
+    $result = mysqli_query($link, "SELECT * FROM postal_offices");
+
+    closeDB();
+    return mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
+
+function getAddressByID($id)
+{
+    global $link;
+    openDB();
+
+    $result = mysqli_query($link, "SELECT address FROM postal_offices WHERE office_id='$id'");
+
+    closeDB();
+    return mysqli_fetch_row($result);
 }
 
 ?>
