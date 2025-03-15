@@ -31,6 +31,9 @@ $oneRow = getRowFromTable(5);
             foreach ($parcel as $key => $val) {
                 if ($key == 'receiving_date' && is_null($val)) {
                     echo "<td>Не получено</td>";
+                } else if ($key == 'receiver_address') {
+                    $address = getAddressByID($parcel['office_id'])[0];
+                    echo "<td>$address</td>";
                 } else {
                     echo "<td>$val</td>";
                 }
